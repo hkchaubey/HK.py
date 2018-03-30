@@ -3,7 +3,7 @@ print 'Hello Buddy'
 print 'Let\'s get started'
 spy_exist = raw_input("Are you a new user? Y/N")
 if spy_exist.upper()=="N":      #use nested if & else.
-    print "Welcome Back" +spy_name + " age: "+str(spy_age) +" having raiting of " +str(spy_raiting)
+    print "Welcome Back"
 
 elif spy_exist.upper()=="Y":     #use .upper for change alphabet foramt in upper case.
     spy_name=raw_input('what is your spy name..!!')
