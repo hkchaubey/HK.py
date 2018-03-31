@@ -1,89 +1,160 @@
-from spy_details import spy_name, spy_age, spy_raiting
-print 'Hello Buddy'
-print 'Let\'s get started'
-STATUS_MESSAGE = ['Galti Bade Galti Engineering','Attachment are good for email only','sleepy','all is well','Bhole']
+from spy_details import Spy_Name, Spy_Rating, Spy_Age
+
+print "Hello!!! \nWelcome To SpyChat."
+
+STATUS_MESSAGE = ["Hey..!!", "All_Good", "Namaskar" "All Is Well"]
+
+friends_name = []
+friends_age = []
+friends_Code_Name = []
+friend_is_online = []
 
 
 def add_status(c_status):
     if c_status != None:
-        print "your current_status is " + c_status
+        print "your current status is " + c_status
     else:
-        print "you dont have any status currently"
-    existing_status = raw_input("you want to select from old status? Y/N")
-    if existing_status.upper()=="N":
-        new_status=raw_input("enter your status " )
-        if len(new_status)>0:
-            STATUS_MESSAGE.append("new_status")
-    elif existing_status.upper()=="Y":
+        print "you don't have any status currently"
+    existing_status = raw_input("Do you want to add new status? Y/N ")
+    if existing_status.upper() == "Y":
+        new_status = raw_input("Enter your status: ")
+        if len(new_status) > 0:
+            STATUS_MESSAGE.append(new_status)
+
+    elif existing_status.upper() == "N":
         serial_no = 1
         for old_status in STATUS_MESSAGE:
-            print str(serial_no) + " . " +  old_status
-            serial_no=serial_no + 1
-        user_choice = input ("enter your choice: ")
-        new_status =  STATUS_MESSAGE[user_choice-1]
-    update_status=new_status
+            print str(serial_no) + ". " + old_status
+            serial_no = serial_no + 1
+        user_choice = input("Enter your choice: ")
+        new_status = STATUS_MESSAGE[user_choice - 1]
+    update_status = new_status
     return update_status
 
 
+def add_friend():
+    frnd_name = raw_input("What is your name? ")
+    frnd_age = input("What is your age? ")
+    frnd_code_name = raw_input("What is your code name? ")
+    if len(frnd_name) > 3 and 18 < frnd_age < 50 and frnd_code_name > 3:
+        friends_name.append(frnd_name)
+        friends_age.append(frnd_age)
+        friends_Code_Name.append(frnd_code_name)
+        friend_is_online.append(True)
+    else:
+        print "Friend's Can't be added"
+    return len(friends_name)
 
 
+def Start_Chat(Spy_Code_Name, Spy_Age):
+    print Spy_Code_Name + " What Do You Want To Do?"
 
-def start_chat(spy_name,spy_age,spy_raiting):
-    print "Here are you options "+ spy_name
-    current_staus = None
-    show_menu= True
-    while show_menu:
-        choice =  input ("what do want to do? \n 1. Add a status \n 2. Add a friend \n 3.send a message \n 4. Read the message \n 0. exit")
-        if choice == 1:
-            updated_status_message = add_status(current_status)
-            print "updated status is " +  updated_status_message
+    current_status = None
 
-        elif choice==2:
-            print "will add a frnd"
-        elif choice==0:
-            show_menu = False
+    Show_Menu = True
+    while Show_Menu:
+        Choices = input("1. Update Status \n2. Add A Friend \n3. Send A Message \n0. Exit ")
+        if Choices == 1:
+
+            current_status = add_status(current_status)
+            print "updated status " + current_status
+#use nested if
+        elif Choices == 2:
+
+            no_of_friends = add_friend()
+            print "you have " + str(no_of_friends) + " friends"
+            print "your friend list is: \n" \
+                  "" +str(friends_name)
+
+        elif Choices == 3:
+            Message = raw_input("Type A Message To Send. ")
+            print "Your Message \n" + Message
+        elif Choices == 0:
+            Show_Menu = False
+            print "Hope You Enjoyed The Session. \nHave A Good Day..!!"
         else:
-            print "invalid input"
+            print "Choose A Correct Option."
 
-spy_exist = raw_input("Are you a new user? Y/N")
-if spy_exist.upper()=="N":      #use nested if & else.
-    print "Welcome Back "  +spy_name + " age: "+str(spy_age) +" having raiting of " +str(spy_raiting)
 
-elif spy_exist.upper()=="Y":     #use .upper for change alphabet foramt in upper case.
-    spy_name=raw_input('what is your spy name..!!')
-    if len(spy_name)>2:
-        print  'welcome '  + spy_name +  '. Glad to have you back with us.'
-        spy_salution = raw_input("what should we call you(Mr or Ms)?")
-        if spy_salution.upper()=="Mr"  or spy_salution.upper()=="Ms":
-            spy_name = spy_salution + " "+ spy_name
-            print "alright " + spy_name + ". I would like to know a little bit about you"
+Existing_Spy = raw_input("Are You A New User (Y/N) ")
+
+if Existing_Spy == "N".lower() or Existing_Spy == "n".upper():
+    print "Welcome Back Agent " + Spy_Name + ". \nSpy Rating " + str(Spy_Rating) + "\nAge " + str(Spy_Age)
+    Start_Chat(Spy_Rating, Spy_Age)
+
+
+elif Existing_Spy == "Y".lower() or Existing_Spy == "y".upper():
+    Spy_Name = raw_input("What's Your Name? ")
+    if len(Spy_Name) > 3:
+        print "Welcome " + Spy_Name + " Glad to see you."
+
+        Spy_Salutation = raw_input("What should we call you (Mr. or Ms.)? ")
+        # #use .upper for change alphabet foramt in upper case.
+
+        if Spy_Salutation == "Mr".upper() or Spy_Salutation == "Ms".upper() or \
+                        Spy_Salutation == "Mr".lower() or Spy_Salutation == "Ms".lower() or \
+                        Spy_Salutation == "Mr".isspace():
+
+
+            Spy_Name = Spy_Salutation + " " + Spy_Name
+
+            print "Alright " + Spy_Name + " " + "We Would Like To Know A Little Bit More About You..."
             spy_age = 0
-            spy_raiting = 0.0      #use for known about spy_qualification.
+
+            spy_raiting = 0.0  # use for known about spy_qualification.
+
             spy_is_online = True
+
             spy_age = input('what is your age?')
-            if 50>spy_age>12:
+
+            if 50 > spy_age > 12:
 
                 print "your age is correct"
+
                 spy_raiting = input('what is your raiting?')
-                if spy_raiting>5.0: #nested if
-                     print "great spy"
-                elif 3.5<spy_raiting<=5.0:
+
+                if spy_raiting > 5.0:  # nested if
+
+                    print "great spy"
+
+                elif 3.5 < spy_raiting <= 5.0:
+
                     print "avg. spy"
-                elif 2.5<spy_raiting<=3.5:
+
+                elif 2.5 < spy_raiting <= 3.5:
+
                     print "bad spy"
+
                 else:
+
                     print " who hired you? "
+
                 spy_is_online = True
-                print "Authentication Complete Welcome " + spy_name + " age:" +str(spy_age) + " raiting:"+str(
+
+                print "Authentication Complete Welcome " + Spy_Name + " age:" + str(spy_age) + " raiting:" + str(
+
                     spy_raiting)
+
             else:
+
                 print "you are not eligible for spy..!!"
+
         else:
+
             print "invalid salution"
+
     else:
+
         print "ooopss please enter valid name"
+
 else:
+
     print"invalid entry"
+
+
+
+
+
 
 
 
