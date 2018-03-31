@@ -1,4 +1,5 @@
-spy_name = "guru"
-spy_age= 19
-spy_raiting= 3.9
+Spy_Name = "HK"
+Spy_Rating = "1.2"
+Spy_Age = 21
+
 
