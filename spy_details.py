@@ -1,3 +1,6 @@
-Spy_Name = "HK"
-Spy_Rating = "1.2"
-Spy_Age = 21
+Spy = {
+
+    'Name':'HK',
+    'Age': 24,
+    'Rating':1.2
+}
