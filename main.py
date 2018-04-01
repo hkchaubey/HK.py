@@ -1,10 +1,17 @@
 from spy_details import Spy
 
+#use module
+
+from steganography.steganography import Steganography
+from datetime import datetime
+f = datetime.now()
+
+print f
 print "Hello!!! \nWelcome To SpyChat."
 
 STATUS_MESSAGE = ["Hey..!!", "All_Good", "Namaskar" "All Is Well"]
 
-friends = [{'Name':'Guru','Age':'22','Rating':'3.1','is_online':True},{'Name':'HKC','Age':'21','Rating':'3.6','is_online':True}]
+friends = [{'Name':'Guru','Age':'22','Rating':'3.1','is_online':True,'chats':[]},{'Name':'HKC','Age':'21','Rating':'3.6','is_online':True,'chats':[]}]
 
 
 def add_status(c_status):
@@ -34,7 +41,8 @@ def add_friend():
         'Name': 'HK',
         'Age': 0,
         'Rating': 0.0,
-        'is_online':True
+        'is_online':True,
+        'chats': []
     }
     frnd['Name'] = raw_input("What is your name? ")
     frnd['Age'] = input("What is your age? ")
@@ -45,6 +53,45 @@ def add_friend():
     else:
         print "Friend's Can't be added"
     return len(friends)
+
+def select_frnd():
+    serial_no = 1
+    for frnd in friends:
+        print str(serial_no) + " " +frnd['Name']
+        serial_no = serial_no+1
+        user_selected_frnd = input("enter your choice : ")
+        user_selected_frnd_index = user_selected_frnd - 1
+        return user_selected_frnd_index
+#use decode() incode() function
+
+def Send_Message():
+    selected_frnd = select_frnd()
+    original_image = raw_input("what is the name of original image? ")
+    secret_text = raw_input("what is your secret text? ")
+    output_path = "output.jpg"
+    Steganography.encode(original_image,output_path,secret_text)
+
+    new_chat = {
+        "message": secret_text,
+        "time": datetime.now(),
+        "sent_by_me": True
+    }
+    friends[selected_frnd]['chats']. append(new_chat)
+    print "your secret message has been saved"
+
+def read_message():
+        selected_frnd = select_frnd()
+        output_path = raw_input("which image you want to decode? ")
+        secret_text = Steganography.decode(output_path)
+        print "secret text is " + secret_text
+        new_chat = {
+            "message": secret_text,
+            "time": datetime.now(),
+            "sent_by_me": False
+        }
+        friends[selected_frnd]['chats'].append(new_chat)
+        print "your secret message has been saved"
+
 
 def Start_Chat(Spy_Name, Spy_Age):
     print Spy['Name'] + " What Do You Want To Do?"
@@ -67,10 +114,9 @@ def Start_Chat(Spy_Name, Spy_Age):
                   "" +str(friends)
 
         elif Choices == 3:
-            Message = raw_input("Type A Message To Send. ")
-            print "Your Message \n" + Message
-        elif Choices== 4:
-            read_message()
+            Send_Message=()
+
+
 
         elif Choices == 0:
             Show_Menu = False
