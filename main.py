@@ -1,13 +1,10 @@
-from spy_details import Spy_Name, Spy_Rating, Spy_Age
+from spy_details import Spy
 
 print "Hello!!! \nWelcome To SpyChat."
 
 STATUS_MESSAGE = ["Hey..!!", "All_Good", "Namaskar" "All Is Well"]
 
-friends_name = []
-friends_age = []
-friends_Code_Name = []
-friend_is_online = []
+friends = [{'Name':'Guru','Age':'22','Rating':'3.1','is_online':True},{'Name':'HKC','Age':'21','Rating':'3.6','is_online':True}]
 
 
 def add_status(c_status):
@@ -33,27 +30,30 @@ def add_status(c_status):
 
 
 def add_friend():
-    frnd_name = raw_input("What is your name? ")
-    frnd_age = input("What is your age? ")
-    frnd_code_name = raw_input("What is your code name? ")
-    if len(frnd_name) > 3 and 18 < frnd_age < 50 and frnd_code_name > 3:
-        friends_name.append(frnd_name)
-        friends_age.append(frnd_age)
-        friends_Code_Name.append(frnd_code_name)
-        friend_is_online.append(True)
+    frnd ={
+        'Name': 'HK',
+        'Age': 0,
+        'Rating': 0.0,
+        'is_online':True
+    }
+    frnd['Name'] = raw_input("What is your name? ")
+    frnd['Age'] = input("What is your age? ")
+    frnd['Rating'] = raw_input("What is your Rating? ")
+    if len(frnd['Name']) > 3 and 18 < frnd['Age'] < 50 and frnd['Rating'] > 3:
+        friends.append(frnd)
+
     else:
         print "Friend's Can't be added"
-    return len(friends_name)
+    return len(friends)
 
-
-def Start_Chat(Spy_Code_Name, Spy_Age):
-    print Spy_Code_Name + " What Do You Want To Do?"
+def Start_Chat(Spy_Name, Spy_Age):
+    print Spy['Name'] + " What Do You Want To Do?"
 
     current_status = None
 
     Show_Menu = True
     while Show_Menu:
-        Choices = input("1. Update Status \n2. Add A Friend \n3. Send A Message \n0. Exit ")
+        Choices = input("1. Update Status \n2. Add A Friend \n3. Send A Message \n4. Read a Message \n0. Exit ")
         if Choices == 1:
 
             current_status = add_status(current_status)
@@ -64,11 +64,14 @@ def Start_Chat(Spy_Code_Name, Spy_Age):
             no_of_friends = add_friend()
             print "you have " + str(no_of_friends) + " friends"
             print "your friend list is: \n" \
-                  "" +str(friends_name)
+                  "" +str(friends)
 
         elif Choices == 3:
             Message = raw_input("Type A Message To Send. ")
             print "Your Message \n" + Message
+        elif Choices== 4:
+            read_message()
+
         elif Choices == 0:
             Show_Menu = False
             print "Hope You Enjoyed The Session. \nHave A Good Day..!!"
@@ -79,14 +82,20 @@ def Start_Chat(Spy_Code_Name, Spy_Age):
 Existing_Spy = raw_input("Are You A New User (Y/N) ")
 
 if Existing_Spy == "N".lower() or Existing_Spy == "n".upper():
-    print "Welcome Back Agent " + Spy_Name + ". \nSpy Rating " + str(Spy_Rating) + "\nAge " + str(Spy_Age)
-    Start_Chat(Spy_Rating, Spy_Age)
+    print "Welcome Back Agent " + Spy['Name'] + ". \nSpy Rating " + str(Spy['Rating']) + "\nAge " + str(Spy['Age'])
+    Start_Chat(Spy['Rating'], Spy['Age'])
 
 
 elif Existing_Spy == "Y".lower() or Existing_Spy == "y".upper():
-    Spy_Name = raw_input("What's Your Name? ")
-    if len(Spy_Name) > 3:
-        print "Welcome " + Spy_Name + " Glad to see you."
+    Spy ={
+
+        'Name':' ',
+        'Age': 0,
+        'Rating':0.0
+    }
+    Spy['Name'] = raw_input("What's Your Name? ")
+    if len(Spy['Name']) > 3:
+        print "Welcome " + Spy['Name'] + " Glad to see you."
 
         Spy_Salutation = raw_input("What should we call you (Mr. or Ms.)? ")
         # #use .upper for change alphabet foramt in upper case.
@@ -96,7 +105,7 @@ elif Existing_Spy == "Y".lower() or Existing_Spy == "y".upper():
                         Spy_Salutation == "Mr".isspace():
 
 
-            Spy_Name = Spy_Salutation + " " + Spy_Name
+            Spy_Name = Spy_Salutation + " " + Spy['Name']
 
             print "Alright " + Spy_Name + " " + "We Would Like To Know A Little Bit More About You..."
             spy_age = 0
