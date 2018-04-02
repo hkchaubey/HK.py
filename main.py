@@ -97,7 +97,6 @@ def Start_Chat(Spy_Name, Spy_Age):
     print Spy['Name'] + " What Do You Want To Do?"
 
     current_status = None
-
     Show_Menu = True
     while Show_Menu:
         Choices = input("1. Update Status \n2. Add A Friend \n3. Send A Message \n4. Read a Message \n0. Exit ")
@@ -114,7 +113,10 @@ def Start_Chat(Spy_Name, Spy_Age):
                   "" +str(friends)
 
         elif Choices == 3:
-            Send_Message=()
+            Send_Message()
+            
+        elif choices==4:
+            read_message()
 
 
 
