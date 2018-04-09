@@ -1,4 +1,4 @@
-from spy_details import spy ,Spy, ChatMessage
+from spy_details import spy,Spy, ChatMessage
 
 #use module
 from steganography.steganography import Steganography
@@ -15,6 +15,7 @@ STATUS_MESSAGE = ["Hey..!!", "All_Good", "Namaskar" "All Is Well"]
 frnd1 =Spy('HK','Mr.',21,2.9)
 frnd2 =Spy('ChaubeyK','Mr.',21,2.9)
 friends = [frnd1,frnd2]
+CHATS=[]
 def load_frnd():
     with open('friends.csv', 'rb') as friends_data:
         reader = csv.reader(friends_data)
@@ -22,6 +23,16 @@ def load_frnd():
         for row in reader:
             spy=Spy(Name=row[0],Salutation=row[1],Age=row[3],Rating=row[2])
             friends.append(spy)
+
+load_frnd()
+def load_chats():
+    with open('chats.csv', 'rb') as chats_data:
+        reader = csv.reader(chats_data)
+
+        for row in reader:
+            message = CHATS(sender_name=row[0],message=row[1])
+            message.append(CHATS)
+
 
 
 def add_status(c_status):
@@ -125,6 +136,10 @@ def Send_Message():
     friends[selected_frnd].chats.append(new_chat)
 
     print "your secret message has been saved"
+    with open('chats.csv', 'a') as chats_data:
+        writer = csv.writer(chats_data)
+        writer.writerow(CHATS)
+
 
 def read_message():
 
@@ -144,9 +159,9 @@ def read_message():
 
         print "your secret message has been saved"
 
-def Start_Chat(Spy_Name, Spy_Age):
+def Start_Chat(spy_Name,spy_Rating, spy_Age):
 
-    print Spy.Name + " What Do You Want To Do?"
+    print spy.Name + " What Do You Want To Do?"
 
 
 
@@ -210,8 +225,8 @@ Existing_spy = raw_input("Are You A New User (Y/N) ")
 
 if Existing_spy == "N".lower() or Existing_spy == "n".upper():
     print "Welcome Back Agent"
+    Start_Chat(spy.Name,spy.Rating,spy.Age)
 
-    Start_Chat(Spy.Name,Spy.Rating,Spy.Age)
 
 
 
