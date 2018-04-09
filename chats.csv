@@ -1,9 +1,5 @@
-message
-who i am
-SOS
-hey..!!
-
-
-
-
-
+name, saluation,  rating, age,  is_online
+HK, Mr., 4.2, 21,True
+Suresh, Mr., 3.4, 23, True
+Naresh, Mr., 2.4, 24, True
+Mahesh, Mr., 2.2, 43, True
